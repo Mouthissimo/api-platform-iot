@@ -15,6 +15,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import * as serviceWorker from './serviceWorker';
 // Import your reducers and routes here
+import game from './reducers/game/';
+import greeting from './reducers/greeting/';
+import player from './reducers/player/';
+import gameRoutes from './routes/game';
+import greetingRoutes from './routes/greeting';
+import playerRoutes from './routes/player';
+
 import Welcome from './Welcome';
 
 const history = createBrowserHistory();
@@ -23,6 +30,7 @@ const store = createStore(
     router: connectRouter(history),
     form,
     /* Add your reducers here */
+    game, player, greeting
   }),
   applyMiddleware(routerMiddleware(history), thunk)
 );
@@ -32,7 +40,9 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={Welcome} strict={true} exact={true}/>
-        {/* Add your routes here */}
+        { gameRoutes }
+        { greetingRoutes}
+        { playerRoutes }
         <Route render={() => <h1>Not Found</h1>} />
       </Switch>
     </ConnectedRouter>
